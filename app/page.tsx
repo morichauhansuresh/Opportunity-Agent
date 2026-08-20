@@ -12,7 +12,11 @@ const examples = [
 export default function Home() {
   const [prompt, setPrompt] = useState(examples[0]);
   const [result, setResult] = useState<unknown>(null);
-  const [meta, setMeta] = useState<{ model?: string; currentDate?: string } | null>(null);
+  const [meta, setMeta] = useState<{
+    provider?: string;
+    model?: string;
+    currentDate?: string;
+  } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -57,8 +61,8 @@ export default function Home() {
           <h1>Turn a simple prompt into a CRM-ready command.</h1>
           <p>
             A client-demo version of the Opportunity Agent. Enter a natural-language request and the
-            server-side LLM converts it into a validated JSON structure that can later drive your
-            Playwright automation.
+            server-side Cursor AI agent converts it into a validated JSON structure that can later drive
+            your Playwright automation.
           </p>
         </header>
 
@@ -69,7 +73,7 @@ export default function Home() {
                 <span className="panel-kicker">1. USER PROMPT</span>
                 <h2>What do you want to do?</h2>
               </div>
-              <span className="status-pill neutral">Demo only</span>
+              <span className="status-pill neutral">Cursor AI</span>
             </div>
 
             <textarea
@@ -93,7 +97,7 @@ export default function Home() {
             </button>
 
             <p className="helper">
-              Your OpenAI key stays on the server. The browser only sends the user prompt to this app.
+              Your Cursor API key stays on the server. The browser only sends the user prompt to this app.
             </p>
           </div>
 
@@ -127,6 +131,7 @@ export default function Home() {
 
             {meta && (
               <div className="meta-row">
+                <span>Provider: {meta.provider}</span>
                 <span>Model: {meta.model}</span>
                 <span>Reference date: {meta.currentDate}</span>
               </div>
@@ -137,7 +142,7 @@ export default function Home() {
         <section className="architecture">
           <div className="architecture-copy">
             <span className="panel-kicker">WHAT COMES NEXT</span>
-            <h2>Prompt → Agent → JSON → Playwright</h2>
+            <h2>Prompt → Cursor → JSON → Playwright</h2>
             <p>
               This demo stops immediately after validation. In the next stage, we can connect the
               command to your existing TypeScript Playwright automation and turn
@@ -148,7 +153,7 @@ export default function Home() {
           <div className="flow">
             {[
               ["01", "User", "Natural language"],
-              ["02", "LLM", "Intent + fields"],
+              ["02", "Cursor", "Intent + fields"],
               ["03", "Zod", "Validate command"],
               ["04", "Tool", "Playwright / API"],
             ].map(([number, title, subtitle], index) => (
@@ -164,7 +169,7 @@ export default function Home() {
           </div>
         </section>
 
-        <footer>Opportunity AI Agent Demo • Ready for Vercel</footer>
+        <footer>Opportunity AI Agent Demo • Cursor provider • Ready for Vercel</footer>
       </section>
     </main>
   );
